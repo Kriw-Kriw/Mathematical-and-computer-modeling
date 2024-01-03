@@ -1,0 +1,49 @@
+# encoding: utf-8
+# 2020 R1
+SetScriptVersion(Version="20.1.164")
+template1 = GetTemplate(TemplateName="Mesh")
+system1 = GetSystem(Name="Geom")
+system2 = template1.CreateSystem(
+    Position="Right",
+    RelativeTo=system1)
+system3 = template1.CreateSystem(
+    Position="Below",
+    RelativeTo=system2)
+system4 = template1.CreateSystem(
+    Position="Below",
+    RelativeTo=system3)
+geometryComponent1 = system2.GetComponent(Name="Geometry")
+geometryComponent2 = system1.GetComponent(Name="Geometry")
+geometryComponent1.ReplaceWithShare(
+    TargetSystem=system2,
+    ComponentToShare=geometryComponent2,
+    SourceSystem=system1)
+meshComponent1 = system2.GetComponent(Name="Mesh")
+meshComponent1.Refresh()
+mesh1 = system2.GetContainer(ComponentName="Mesh")
+mesh1.Edit()
+geometryComponent3 = system3.GetComponent(Name="Geometry")
+geometryComponent3.ReplaceWithShare(
+    TargetSystem=system3,
+    ComponentToShare=geometryComponent2,
+    SourceSystem=system1)
+geometryComponent4 = system4.GetComponent(Name="Geometry")
+geometryComponent4.ReplaceWithShare(
+    TargetSystem=system4,
+    ComponentToShare=geometryComponent2,
+    SourceSystem=system1)
+Save(Overwrite=True)
+mesh1.Exit()
+meshComponent2 = system3.GetComponent(Name="Mesh")
+meshComponent2.Refresh()
+mesh2 = system3.GetContainer(ComponentName="Mesh")
+mesh2.Edit()
+Save(Overwrite=True)
+mesh2.Exit()
+meshComponent3 = system4.GetComponent(Name="Mesh")
+meshComponent3.Refresh()
+mesh3 = system4.GetContainer(ComponentName="Mesh")
+mesh3.Edit()
+Save(Overwrite=True)
+mesh3.Exit()
+Save(Overwrite=True)

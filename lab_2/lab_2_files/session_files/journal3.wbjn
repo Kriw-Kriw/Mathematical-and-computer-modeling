@@ -1,0 +1,119 @@
+# encoding: utf-8
+# 2020 R1
+SetScriptVersion(Version="20.1.164")
+template1 = GetTemplate(TemplateName="Mesh")
+system1 = GetSystem(Name="Geom")
+system2 = template1.CreateSystem(
+    Position="Right",
+    RelativeTo=system1)
+system3 = template1.CreateSystem(
+    Position="Below",
+    RelativeTo=system2)
+system4 = template1.CreateSystem(
+    Position="Below",
+    RelativeTo=system3)
+geometryComponent1 = system2.GetComponent(Name="Geometry")
+geometryComponent2 = system1.GetComponent(Name="Geometry")
+geometryComponent1.ReplaceWithShare(
+    TargetSystem=system2,
+    ComponentToShare=geometryComponent2,
+    SourceSystem=system1)
+geometryComponent3 = system3.GetComponent(Name="Geometry")
+geometryComponent3.ReplaceWithShare(
+    TargetSystem=system3,
+    ComponentToShare=geometryComponent2,
+    SourceSystem=system1)
+meshComponent1 = system4.GetComponent(Name="Mesh")
+geometryComponent2.TransferData(TargetComponent=meshComponent1)
+system4.Delete()
+system2.Delete()
+system3.Delete()
+geometry1 = system1.GetContainer(ComponentName="Geometry")
+geometry1.Edit()
+geometry1.Exit()
+system5 = template1.CreateSystem(
+    Position="Right",
+    RelativeTo=system1)
+system6 = template1.CreateSystem(
+    Position="Below",
+    RelativeTo=system5)
+system7 = template1.CreateSystem(
+    Position="Below",
+    RelativeTo=system6)
+geometryComponent4 = system5.GetComponent(Name="Geometry")
+geometryComponent4.ReplaceWithShare(
+    TargetSystem=system5,
+    ComponentToShare=geometryComponent2,
+    SourceSystem=system1)
+meshComponent2 = system5.GetComponent(Name="Mesh")
+meshComponent2.Refresh()
+mesh1 = system5.GetContainer(ComponentName="Mesh")
+mesh1.Edit()
+system8 = system1.Duplicate(
+    ComponentsToShare=[],
+    RelativeTo=system1)
+system7.Delete()
+system6.Delete()
+system8.Move(
+    Position="Right",
+    RelativeTo=system5)
+system9 = template1.CreateSystem(
+    Position="Right",
+    RelativeTo=system8)
+geometry2 = system8.GetContainer(ComponentName="Geometry")
+geometry2.Edit()
+Save(Overwrite=True)
+geometry2.Exit()
+geometryComponent5 = system9.GetComponent(Name="Geometry")
+geometryComponent6 = system8.GetComponent(Name="Geometry")
+geometryComponent5.ReplaceWithShare(
+    TargetSystem=system9,
+    ComponentToShare=geometryComponent6,
+    SourceSystem=system8)
+meshComponent3 = system9.GetComponent(Name="Mesh")
+meshComponent3.Refresh()
+mesh2 = system9.GetContainer(ComponentName="Mesh")
+mesh2.Edit()
+mesh2.Exit()
+geometry2.Edit()
+geometry2.Exit()
+system9.Delete()
+system8.Delete()
+system1.Copy(KeepConnections=True)
+system10 = GetSystem(Name="Geom 1")
+system11 = template1.CreateSystem(
+    Position="Right",
+    RelativeTo=system10)
+geometryComponent7 = system11.GetComponent(Name="Geometry")
+geometryComponent8 = system10.GetComponent(Name="Geometry")
+geometryComponent7.ReplaceWithShare(
+    TargetSystem=system11,
+    ComponentToShare=geometryComponent8,
+    SourceSystem=system10)
+meshComponent4 = system11.GetComponent(Name="Mesh")
+meshComponent4.Refresh()
+mesh3 = system11.GetContainer(ComponentName="Mesh")
+mesh3.Edit()
+mesh3.Exit()
+system11.Delete()
+geometry3 = system10.GetContainer(ComponentName="Geometry")
+geometry3.Edit()
+Save(Overwrite=True)
+Save(Overwrite=True)
+geometry3.Exit()
+system12 = template1.CreateSystem(
+    Position="Right",
+    RelativeTo=system10)
+geometryComponent9 = system12.GetComponent(Name="Geometry")
+geometryComponent9.ReplaceWithShare(
+    TargetSystem=system12,
+    ComponentToShare=geometryComponent8,
+    SourceSystem=system10)
+meshComponent5 = system12.GetComponent(Name="Mesh")
+meshComponent5.Refresh()
+mesh4 = system12.GetContainer(ComponentName="Mesh")
+mesh4.Edit()
+mesh4.Exit()
+mesh1.Exit()
+Save(Overwrite=True)
+Save(Overwrite=True)

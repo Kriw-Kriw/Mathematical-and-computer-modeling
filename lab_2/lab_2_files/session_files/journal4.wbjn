@@ -1,0 +1,15 @@
+# encoding: utf-8
+# 2020 R1
+SetScriptVersion(Version="20.1.164")
+system1 = GetSystem(Name="SYS")
+mesh1 = system1.GetContainer(ComponentName="Mesh")
+mesh1.Edit()
+mesh1.Exit()
+system2 = GetSystem(Name="SYS 1")
+mesh2 = system2.GetContainer(ComponentName="Mesh")
+mesh2.Edit()
+geometry1 = system2.GetContainer(ComponentName="Geometry")
+geometry1.Edit()
+geometry1.Exit()
+mesh2.Exit()
+Save(Overwrite=True)
